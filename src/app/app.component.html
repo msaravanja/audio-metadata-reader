@@ -1,7 +1,13 @@
-<ag-grid-angular
-    style="width: 500px; height: 500px;"
+<div class="container">
+    <ag-grid-angular
+    #agGrid
+    style="width: 100%; height: 500px"
     class="ag-theme-balham"
-    [rowData]="rowData"
+    [rowData]="rowData | async"
     [columnDefs]="columnDefs"
+    rowSelection="multiple"
+    (firstDataRendered)="onFirstDataRendered($event)"
     >
 </ag-grid-angular>
+
+</div>
