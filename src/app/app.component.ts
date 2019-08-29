@@ -66,10 +66,10 @@ export class AppComponent implements OnInit {
   ];
 
   columnDefsUpper = [
-    {headerName: 'Title', field: 'title', sortable: true, filter: true, checkboxSelection: true },
-    {headerName: 'Album', field: 'album', sortable: true, filter: true },
-    {headerName: 'Artist', field: 'artist', sortable: true, filter: true },
-    {headerName: 'Year', field: 'year', sortable: true, filter: true }
+    {headerName: 'Title', field: 'common.title', sortable: true, filter: true, checkboxSelection: true },
+    {headerName: 'Album', field: 'common.album', sortable: true, filter: true },
+    {headerName: 'Artist', field: 'common.artist', sortable: true, filter: true },
+    {headerName: 'Year', field: 'common.year', sortable: true, filter: true }
   ];
 
   rowDataUpperTable: any;
@@ -190,7 +190,7 @@ export class AppComponent implements OnInit {
         result.metadata = metadata;
 
         // this.rowDataUpperTable.push(metadata.common); // This trigger the table to reload
-        this.rowDataUpperTable = this.rowDataUpperTable.concat([metadata.common]); // This way we assign a fresh array which wakes up the grid
+        this.rowDataUpperTable = this.rowDataUpperTable.concat([metadata]); // This way we assign a fresh array which wakes up the grid
       });
     }).catch(err => {
       this.zone.run<void>(() => {
