@@ -15,7 +15,6 @@
   <div *ngIf="!rowDataUpperTable">Waiting for metadata....</div>
 
   <div *ngIf="rowDataUpperTable">Oh yes, now got the metadata, we can access the album:
-    {{rowDataUpperTable.common.album}}
     <ag-grid-angular #agGrid style="width: 100%; height: 200px" class="ag-theme-balham" [rowData]="rowDataUpperTable"
       [columnDefs]="columnDefsUpper" rowSelection="multiple" (firstDataRendered)="onFirstDataRendered($event)">
     </ag-grid-angular>
