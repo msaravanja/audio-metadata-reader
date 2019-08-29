@@ -17,6 +17,10 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "stream": [ "node_modules/readable-stream" ],
+      "assert": [ "node_modules/assert" ]
+    }
   }
 }
