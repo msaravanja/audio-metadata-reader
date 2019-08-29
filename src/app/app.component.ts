@@ -66,10 +66,10 @@ export class AppComponent implements OnInit {
   ];
 
   columnDefsUpper = [
-    {headerName: 'Title', field: 'common.title', sortable: true, filter: true, checkboxSelection: true },
-    {headerName: 'Album', field: 'common.album', sortable: true, filter: true },
-    {headerName: 'Artist', field: 'common.artist', sortable: true, filter: true },
-    {headerName: 'Year', field: 'common.year', sortable: true, filter: true }
+    {headerName: 'Title', field: 'title', sortable: true, filter: true, checkboxSelection: true },
+    {headerName: 'Album', field: 'album', sortable: true, filter: true },
+    {headerName: 'Artist', field: 'artist', sortable: true, filter: true },
+    {headerName: 'Year', field: 'year', sortable: true, filter: true }
   ];
 
   rowDataUpperTable: any;
@@ -77,12 +77,12 @@ export class AppComponent implements OnInit {
 
   err: any;
 
-  constructor(private http: HttpClient, private zone: NgZone,) {
-
+  constructor(private http: HttpClient, private zone: NgZone) {
   }
 
   ngOnInit() {
-      this.rowDataBottomTable = this.http.get('https://api.myjson.com/bins/15psn9');
+    this.rowDataBottomTable = this.http.get('https://api.myjson.com/bins/15psn9');
+    this.rowDataUpperTable = [];
   }
 
   onFirstDataRendered(params) {
@@ -188,10 +188,9 @@ export class AppComponent implements OnInit {
       this.zone.run(() => {
         console.log('Completed parsing of %s:', file.name, metadata);
         result.metadata = metadata;
-        this.rowDataUpperTable = metadata; // assigning metadata to upper table dataset
-        this.tagLists[0].tags = this.prepareTags(formatLabels, metadata.format);
-        this.tagLists[1].tags = this.prepareTags(commonLabels, metadata.common);
-        this.nativeTags = this.prepareNativeTags(metadata.native);
+
+        // this.rowDataUpperTable.push(metadata.common); // This trigger the table to reload
+        this.rowDataUpperTable = this.rowDataUpperTable.concat([metadata.common]); // This way we assign a fresh array which wakes up the grid
       });
     }).catch(err => {
       this.zone.run<void>(() => {
