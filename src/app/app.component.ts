@@ -4,6 +4,7 @@ import { AgGridAngular } from 'ag-grid-angular';
 import { TagLabel, formatLabels, commonLabels } from './drag-and-drop/format-tags';
 
 import * as mm from 'music-metadata-browser';
+import { Observable } from 'rxjs';
 
 
 interface IValue {
@@ -33,6 +34,8 @@ interface ITagList {
   key: string;
   tags?: ITagText[];
 }
+
+type IDataTable = any[] | Observable<any[]> | Promise<any[]>;
 
 @Component({
   selector: 'app-root',
@@ -72,8 +75,8 @@ export class AppComponent implements OnInit {
     {headerName: 'Year', field: 'common.year', sortable: true, filter: true }
   ];
 
-  rowDataUpperTable: any;
-  rowDataBottomTable: any;
+  rowDataUpperTable: any[];
+  rowDataBottomTable: IDataTable;
 
   err: any;
 
@@ -81,7 +84,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.rowDataBottomTable = this.http.get('https://api.myjson.com/bins/15psn9');
+    this.rowDataBottomTable = this.http.get<any[]>('https://api.myjson.com/bins/15psn9');
     this.rowDataUpperTable = [];
   }
 
